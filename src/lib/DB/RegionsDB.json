@@ -1,0 +1,22 @@
+{
+    "OLD" : { 
+        "name" : "Old world",
+        "color" : "043000"
+    },
+    "NEW" : { 
+        "name" : "New world" ,
+        "color" : "7c1501"
+    },
+    "ART" : { 
+        "name" : "Artic",
+        "color" : "014c68"
+    },
+    "CAP" : { 
+        "name" : "Cap Tralaway",
+        "color" : "001363"
+    },
+    "ENB" : { 
+        "name" : "Enbesa" ,
+        "color" : "5e2201"
+    }
+}
