@@ -4,7 +4,7 @@
 
 </script>
 
-<div class="absolute top-2 right-2 flex -space-x-7 hover:space-x-1">
+<div class="absolute top-2 right-2 flex -space-x-7 hover:space-x-1 opacity-80 hover:opacity-100">
     <div class="tooltip tooltip-bottom tooltip-info" data-tip="Center the grid">
         <button class="btn btn-sm btn-circle" on:click={centerGrid}>
             <i class="fa-solid fa-arrows-to-eye"></i>

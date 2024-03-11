@@ -15,7 +15,7 @@
 
 </script>
 
-<div class="fixed bottom-1 flex justify-center right-0 left-0 gap-2">
+<div class="fixed bottom-1 flex justify-center right-0 left-0 gap-2 opacity-80 hover:opacity-100">
     <select class="select w-32" bind:value={selectedRegion}>
         {#each Object.keys(regions) as regionKey (regionKey)}
             <option value="{regionKey}">{regions[regionKey].name}</option>
