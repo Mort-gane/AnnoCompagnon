@@ -1,6 +1,7 @@
 import { writable } from "svelte/store";
 import { default as _regions } from "../DB/RegionsDB.json"
 import { v4 } from "uuid";
+import { Items } from "./Items.js";
 
 export let regions = _regions
 
@@ -13,7 +14,12 @@ export class Islands {
         this.region = region //Feed from Inputs
         this.x = 0 //Feed from viewpoints view
         this.y = 0 //Feed from viewpoints view
+        this.items = writable([])
 
+    }
+
+    addItemsToIslands(name) {
+        this.items.update(n => [...n,...[new Items(name)]])
     }
 
 }

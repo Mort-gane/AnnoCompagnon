@@ -28,14 +28,20 @@
 
 <div class="bg-base-300 absolute flex flex-col w-64 rounded-t-lg rounded-b overflow-hidden" 
     bind:this={DOMisland} use:draggable={{handle : ".handle-card", bounds : "parent", position, onDrag}}>
-    <div class="handle-card p-3 text-lg capitalize text-gray-100" style="background:#{regions[island.region].color}">
-        {island.name}
+    <div class="handle-card flex gap-4 p-3 text-lg text-gray-100" style="background:#{regions[island.region].color}">
+        <h3 class="flex-1 capitalize">{island.name}</h3>
+        <div class="tooltip tooltip-left" data-tip="Add an item">
+            <label for="cardModalProduction-{island.UUID}">
+                <i class="fa-solid fa-square-plus"></i>
+            </label>
+        </div>
+        <div class="tooltip tooltip-left" data-tip="Discard that island">
+            <label for="cardModalDiscard-{island.UUID}">
+                <i class="fa-regular fa-trash-can"></i>
+            </label>
+        </div>
     </div>
-    <div class="grid">
+    <div class="flex flex-col">
         
-    </div>
-    <div class="join p-2 w-full">
-        <label for="cardModalProduction-{island.UUID}" class="btn join-item btn-sm btn-outline flex-1">Add a production</label>
-        <label for="cardModalDiscard-{island.UUID}" class="btn join-item btn-sm btn-error btn-outline">Discard</label>
     </div>
 </div>
