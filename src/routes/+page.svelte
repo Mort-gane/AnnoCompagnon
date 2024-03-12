@@ -3,7 +3,7 @@
     import Input from "$lib/Components/Grid/Input.svelte"
     import Grid from '$lib/Components/Grid/Grid.svelte';
     import QuickTools from "$lib/Components/Controls/QuickTools.svelte"
-    import IslandsDiscardModalListings from '$lib/Components/Islands/IslandsDiscardModalListings.svelte';
+    import IslandsModalListings from '$lib/Components/Islands/IslandsModalListings.svelte';
     import ZoomTool from "$lib/Components/Controls/ZoomTool.svelte";
 
 </script>
@@ -13,5 +13,5 @@
     <Input />
     <QuickTools />
     <ZoomTool/>
-    <IslandsDiscardModalListings />
+    <IslandsModalListings />
 </div>

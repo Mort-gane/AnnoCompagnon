@@ -26,16 +26,16 @@
 
 </script>
 
-<div class="bg-base-300 absolute flex flex-col min-w-64 rounded-t-lg rounded-b overflow-hidden" 
+<div class="bg-base-300 absolute flex flex-col w-64 rounded-t-lg rounded-b overflow-hidden" 
     bind:this={DOMisland} use:draggable={{handle : ".handle-card", bounds : "parent", position, onDrag}}>
     <div class="handle-card p-3 text-lg capitalize text-gray-100" style="background:#{regions[island.region].color}">
-        {island.name},{position.x},{position.y}
+        {island.name}
     </div>
     <div class="grid">
         
     </div>
     <div class="join p-2 w-full">
-        <button class="btn join-item btn-sm btn-outline flex-1">Add a production</button>
-        <label for="cardModal-{island.UUID}" class="btn join-item btn-sm btn-error btn-outline">Discard</label>
+        <label for="cardModalProduction-{island.UUID}" class="btn join-item btn-sm btn-outline flex-1">Add a production</label>
+        <label for="cardModalDiscard-{island.UUID}" class="btn join-item btn-sm btn-error btn-outline">Discard</label>
     </div>
 </div>
