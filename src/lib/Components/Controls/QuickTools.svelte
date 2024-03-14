@@ -31,11 +31,3 @@
         </div>
     </div>
 </div>
-
-<style>
-
-    div {
-        transition: width 1s;
-    }
-
-</style>

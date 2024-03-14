@@ -1,22 +1,27 @@
 {
     "OLD" : { 
         "name" : "Old world",
-        "color" : "043000"
+        "color" : "043000",
+        "sub_color" : "4f6e4d"
     },
     "NEW" : { 
         "name" : "New world" ,
-        "color" : "7c1501"
+        "color" : "7c1501",
+        "sub_color" : "a35b4d"
     },
     "ART" : { 
         "name" : "Artic",
-        "color" : "014c68"
+        "color" : "014c68",
+        "sub_color" : "4d8295"
     },
     "CAP" : { 
         "name" : "Cap Tralaway",
-        "color" : "001363"
+        "color" : "001363",
+        "sub_color" : "4d5a92"
     },
     "ENB" : { 
         "name" : "Enbesa" ,
-        "color" : "5e2201"
+        "color" : "5e2201",
+        "sub_color" : "8e644d"
     }
 }

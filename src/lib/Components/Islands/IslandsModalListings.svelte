@@ -2,7 +2,7 @@
 
     import IslandsDiscardModal from "$lib/Components/Islands/IslandsDiscardModal.svelte"
     import { islandsStore } from "$lib/Class/Islands.js";
-    import IslandsAddItemsModal from "./IslandsAddItemsModal.svelte";
+    import IslandsAddItemsModal from "./ModalItems/IslandsAddItemsModal.svelte";
 
 </script>
 

@@ -22,7 +22,7 @@
         {/each}
     </select>
     <label type="text" class="input input-bordered flex items-center gap-2">
-        <input bind:value={newIslandName} on:keypress={isEnter} type="text" class="grow" placeholder="Search" />
+        <input bind:value={newIslandName} on:keypress={isEnter} type="text" class="grow" placeholder="New island name..." />
         {#if newIslandName}
             <button class="kbd kbd-sm" on:click={addIsland}>+</button>
         {/if}
