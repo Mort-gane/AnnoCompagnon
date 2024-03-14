@@ -12,7 +12,7 @@
 </script>
 
 <IslandsCardsMovementWrapper {island}>
-    <div class="handle-card min-w-48 flex gap-4 p-3 text-lg text-gray-100 shadow" style="background:#{regions[island.region].color}">
+    <div class="handle-card min-w-48 flex gap-4 p-3 text-lg text-gray-100 shadow rounded-t-lg" style="background:#{regions[island.region].color}">
         <h3 class="flex-1 capitalize">{island.name}</h3>
         <IslandsCardsControls {...island} />
     </div>
@@ -21,4 +21,5 @@
             <IslandsCardsItems {item} {...island} />
         {/each}
     </div>
+    <div class="h-4 rounded-b" style="background:#{regions[island.region].color}"></div>
 </IslandsCardsMovementWrapper>

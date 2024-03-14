@@ -25,6 +25,6 @@
 
 </script>
 
-<div class="bg-base-300 absolute flex flex-col w-fit rounded-t-lg rounded-b overflow-hidden" bind:this={DOMisland} use:draggable={{handle : ".handle-card", bounds : "parent", position, onDrag}}>
+<div class="bg-base-300 absolute flex flex-col w-fit rounded-t-lg rounded-b" bind:this={DOMisland} use:draggable={{handle : ".handle-card", bounds : "parent", position, onDrag}}>
     <slot />
 </div>
