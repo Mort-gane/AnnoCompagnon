@@ -1,6 +1,7 @@
 <script context="module">
 
     import { writable } from 'svelte/store';
+    export let gridCanvasContexte = writable({})
     export let gridPosition = writable({ x : 0, y : 0 })
     export let centerGrid = () => {
         gridPosition.set({
@@ -22,11 +23,31 @@
         $gridPosition = { x: offsetX, y: offsetY };
     }
 
-    onMount(() => { centerGrid() })
+    let canva
+    onMount(() => {
+        $gridCanvasContexte = canva.getContext('2d')
+
+        // Define two points
+        let point1 = { x: 50, y: 50 };
+        let point2 = { x: 50, y: 150 };
+        let point3 = { x: 200, y: 150 };
+
+        // Draw line between two points
+        $gridCanvasContexte.beginPath();
+        $gridCanvasContexte.lineWidth = 4; // Set line width
+        $gridCanvasContexte.moveTo(point1.x, point1.y); // Move to the starting point
+        $gridCanvasContexte.lineTo(point2.x, point2.y); // Draw a line to the ending point
+        $gridCanvasContexte.arcTo(point2.x, point2.y, point3.x, point3.y, 20)
+        $gridCanvasContexte.lineTo(point3.x, point3.y)
+        $gridCanvasContexte.stroke(); // Render the line
+
+        //centerGrid() 
+    })
 
 </script>
 
-<div class="absolute bg-grid relative" style="height: 9000px; width : 9000px;" 
+<canvas bind:this={canva} use:draggable={{ position : $gridPosition }} class="absolute bg-grid" height="9000" width="9000"></canvas>
+<div class="absolute border-2 border-info relative" style="height: 9000px; width : 9000px;" 
     use:draggable={{ handle : ".handle", position : $gridPosition, onDrag }}>
     <div class="absolute w-full h-full handle"></div>
     {#each $islandsStore as island (island.UUID)}
@@ -41,7 +62,7 @@
 
     .bg-grid {
         background-size: 20px 20px;
-        background-image: linear-gradient(to right, rgb(140, 140, 140) 1px, transparent 1px),linear-gradient(to bottom, rgb(140, 140, 140) 1px, transparent 1px);
+        background-image: linear-gradient(to right, rgba(140, 140, 140, 0.411) 1px, transparent 1px),linear-gradient(to bottom, rgba(140, 140, 140, 0.411) 1px, transparent 1px);
     }
 
 </style>

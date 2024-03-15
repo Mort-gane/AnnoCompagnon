@@ -1,9 +1,17 @@
+<script context="module">
+
+    import { writable } from "svelte/store";
+    export let currentLinkNode = writable()
+
+</script>
+
 <script>
+
 
     import { regions } from "$lib/Class/Islands.js";
 
     export let item
-    export let items
+    export let delItem
     export let region
     export let UUID
 
@@ -26,6 +34,41 @@
         }
     }
 
+    let leftUUID = `left-${UUID}`
+    let rightUUID = `right-${UUID}`
+    let affectNode = ({side,NodeIslandUUID,NodeItemUUID}) => {
+        //Case of first select
+        if (!$currentLinkNode) {
+            $currentLinkNode = {side,NodeIslandUUID,NodeItemUUID}
+            console.log($currentLinkNode)
+        }
+    }
+    //CSS management for the nodes items
+    let leftCss,rightCss = "fa-circle-plus"
+    currentLinkNode.subscribe((node) => {
+        if (!node) return
+        const {side,NodeIslandUUID,NodeItemUUID} = node
+        console.log(side,NodeIslandUUID,NodeItemUUID)
+        //Case of its this island
+        if (NodeIslandUUID===UUID) {
+            //Case its not that item
+            if (NodeItemUUID!==item.UUID) {
+                leftCss,rightCss = "hidden"
+            //Case its that item
+            } else if (side==="left") {
+                leftCss = "fa-circle-minus text-succes"
+                rightCss = "hidden"
+            } else {
+                leftCss = "hidden"
+                rightCss = "fa-circle-minus text-succes"
+            }
+        }
+    })
+
+    $: {leftCss = leftUUID===$currentLinkNode?'fa-circle-minus':'fa-circle-plus'}
+    $: {rightCss = rightUUID===$currentLinkNode?'fa-circle-minus':'fa-circle-plus'}
+    
+    
 
 </script>
 
@@ -52,12 +95,12 @@
             </div>
         </label>
     </div>
-    <div class="absolute left-link opacity-20 hover:opacity-100 text-white">
-        <i class="fa-solid fa-circle-plus"></i>
-    </div>
-    <div class="absolute right-link opacity-20 hover:opacity-100 text-white">
-        <i class="fa-solid fa-circle-plus"></i>
-    </div>
+    <button on:click={() => affectNode({side:"left",NodeIslandUUID:UUID,NodeItemUUID:item.UUID})} class="cursor-pointer absolute left-link opacity-20 hover:opacity-100 text-white">
+        <i class="{leftCss} fa-solid fa-plus"></i>
+    </button>
+    <button on:click={() => affectNode({side:"right",NodeIslandUUID:UUID,NodeItemUUID:item.UUID})} class="cursor-pointer absolute right-link opacity-20 hover:opacity-100 text-white">
+        <i class="{rightCss} fa-solid fa-plus"></i>
+    </button>
 </div>
 {#if checked}
 <div class="flex p-1 justify-between" style="background-color: #{regions[region].sub_color};">
@@ -68,12 +111,12 @@
     <label>
         <i class="text-gray-200 fa-regular fa-square-minus"></i>
         <input value="{item.consumtion}" on:change={changeConsumtion} type="number" class="input input-bordered input-sm w-16" />
-    </label> 
+    </label>
     <label>
         <i class="text-gray-200 fa-solid fa-ship"></i>
         <input type="number" class="input input-bordered input-sm w-16" disabled/> 
     </label>
-    <button on:click={()=>$items=$items.filter(n=>n.UUID!==item.UUID)} class="btn btn-sm">
+    <button on:click={delItem} class="btn btn-sm">
         <i class="fa-regular fa-trash-can"></i>
     </button>
 </div>
