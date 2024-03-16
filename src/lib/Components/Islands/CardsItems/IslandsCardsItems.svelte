@@ -1,14 +1,9 @@
-<script context="module">
-
-    import { writable } from "svelte/store";
-    export let currentLinkNode = writable()
-
-</script>
-
 <script>
 
-
     import { regions } from "$lib/Class/Islands.js";
+    import { onDestroy, onMount } from "svelte";
+
+    import { radioNodeIds, currentLinkNodeString } from "./RadioBinder.svelte";
 
     export let item
     export let delItem
@@ -34,42 +29,16 @@
         }
     }
 
-    let leftUUID = `left-${UUID}`
-    let rightUUID = `right-${UUID}`
-    let affectNode = ({side,NodeIslandUUID,NodeItemUUID}) => {
-        //Case of first select
-        if (!$currentLinkNode) {
-            $currentLinkNode = {side,NodeIslandUUID,NodeItemUUID}
-            console.log($currentLinkNode)
-        }
-    }
-    //CSS management for the nodes items
-    let leftCss,rightCss = "fa-circle-plus"
-    currentLinkNode.subscribe((node) => {
-        if (!node) return
-        const {side,NodeIslandUUID,NodeItemUUID} = node
-        console.log(side,NodeIslandUUID,NodeItemUUID)
-        //Case of its this island
-        if (NodeIslandUUID===UUID) {
-            //Case its not that item
-            if (NodeItemUUID!==item.UUID) {
-                leftCss,rightCss = "hidden"
-            //Case its that item
-            } else if (side==="left") {
-                leftCss = "fa-circle-minus text-succes"
-                rightCss = "hidden"
-            } else {
-                leftCss = "hidden"
-                rightCss = "fa-circle-minus text-succes"
-            }
-        }
+    let leftNodeId = `${UUID}-${item.UUID}-left`
+    let rightNodeId = `${UUID}-${item.UUID}-right`
+
+    onMount(() => {
+        $radioNodeIds = [...$radioNodeIds,...[leftNodeId,rightNodeId]]
     })
-
-    $: {leftCss = leftUUID===$currentLinkNode?'fa-circle-minus':'fa-circle-plus'}
-    $: {rightCss = rightUUID===$currentLinkNode?'fa-circle-minus':'fa-circle-plus'}
+    onDestroy(() => {
+        $radioNodeIds = $radioNodeIds.filter(n=>[leftNodeId,rightNodeId].includes(n))
+    })
     
-    
-
 </script>
 
 <div class="shadow-sm relative">
@@ -85,7 +54,7 @@
                 {#if item.production && item.production>=consumtionTT}
                     <div style="width : {item.consumtion*200/item.production}px" class="bg-blue-500 h-full"></div>
                     <div class="bg-green-600 h-full flex-1"></div>
-                {:else if item.production}
+                {:else if item.production || consumtionTT}
                     <div style="width : {item.production*200/consumtionTT}px" class="bg-orange-600 h-full"></div>
                     <div class="bg-red-600 h-full flex-1"></div>
                 {/if}
@@ -95,12 +64,35 @@
             </div>
         </label>
     </div>
-    <button on:click={() => affectNode({side:"left",NodeIslandUUID:UUID,NodeItemUUID:item.UUID})} class="cursor-pointer absolute left-link opacity-20 hover:opacity-100 text-white">
-        <i class="{leftCss} fa-solid fa-plus"></i>
-    </button>
-    <button on:click={() => affectNode({side:"right",NodeIslandUUID:UUID,NodeItemUUID:item.UUID})} class="cursor-pointer absolute right-link opacity-20 hover:opacity-100 text-white">
-        <i class="{rightCss} fa-solid fa-plus"></i>
-    </button>
+    <div id="node-{leftNodeId}" style="visibility: hidden;" class="absolute left-link btn btn-circle btn-xs"></div>
+    <div id="node-{rightNodeId}" style="visibility: hidden;" class="absolute right-link btn btn-circle btn-xs"></div>
+    {#if !$currentLinkNodeString}
+        <label for="{leftNodeId}" id="label-{leftNodeId}" class="absolute left-link btn btn-circle btn-ghost btn-xs">
+            <i class="fa-solid fa-plus-circle"></i>
+        </label>
+        <label for="{rightNodeId}" id="label-{rightNodeId}" class="absolute right-link btn btn-circle btn-ghost btn-xs">
+            <i class="fa-solid fa-plus-circle"></i>
+        </label>
+    {:else if $currentLinkNodeString.startsWith(`${UUID}`)}
+        {#if !$currentLinkNodeString.startsWith(`${UUID}-${item.UUID}`)}
+            <!---->
+        {:else if $currentLinkNodeString.endsWith("left")}
+            <label for="voidNode" class="absolute left-link btn-xs btn btn-circle btn-outline btn-error mr-2">
+                <i class="fa-solid fa-minus"></i>
+            </label>
+        {:else if $currentLinkNodeString.endsWith("right")}
+            <label for="voidNode" class="absolute right-link btn-xs btn btn-circle btn-outline btn-error">
+                <i class="fa-solid fa-minus"></i>
+            </label>
+        {/if}
+    {:else}
+        <label for="end-{leftNodeId}" id="label-{leftNodeId}" class="absolute left-link btn btn-circle btn-outline btn-success btn-xs">
+            <i class="fa-solid fa-plus-circle"></i>
+        </label>
+        <label for="end-{rightNodeId}" id="label-{rightNodeId}" class="absolute right-link btn btn-circle btn-outline btn-success btn-xs">
+            <i class="fa-solid fa-plus-circle"></i>
+        </label>
+    {/if}
 </div>
 {#if checked}
 <div class="flex p-1 justify-between" style="background-color: #{regions[region].sub_color};">
@@ -125,12 +117,12 @@
 <style>
 
 .left-link {
-    left: -24px;
+    left: -28px;
     top : 8px;
 }
 
 .right-link {
-    right: -24px;
+    right: -28px;
     top : 8px;
 }
 

@@ -22,10 +22,13 @@
         }
     }
 
+    let input
+    onMount(()=>input.focus())
+
 </script>
 
 <div class="join w-full rounded-t-none">
-    <input on:keyup={changeInputName} on:keydown={isEnter} class="input input-bordered join-item flex-1" placeholder="Bread" />
+    <input bind:this={input} on:keyup={changeInputName} on:keydown={isEnter} class="input input-bordered join-item flex-1" placeholder="Bread" />
     <button on:click={addNewItem} disabled="{!inputName?'disabled':''}"  class="btn join-item"  >
         <i class="fa-solid fa-plus"></i>
     </button>
