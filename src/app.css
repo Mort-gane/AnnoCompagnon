@@ -3,3 +3,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.color-btn {
+    border-color: var(--color);
+    color: var(--color);
+    background-color: transparent;
+}
+
+.color-btn:hover {
+    color: white;
+    background-color: var(--color);
+}

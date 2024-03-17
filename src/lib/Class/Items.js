@@ -1,4 +1,4 @@
-import { writable } from "svelte/store"
+import { derived, writable } from "svelte/store"
 import { v4 } from "uuid"
 
 export let registeredItemsNames = writable([])
@@ -8,10 +8,15 @@ export class Items {
     constructor (name) {
 
         this.UUID = v4() //UUID
-        this.name = name
-        this.production = 0
-        this.consumtion = 0
-
+        this.name = writable(name)
+        this.production = writable(0)
+        this.consumtion = writable(0)
+        this.consumtionTT = derived(
+            [this.consumtion],
+            ([$c]) => {
+                return $c
+            }
+        )
     }
 
     setProduction (production) {

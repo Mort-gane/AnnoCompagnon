@@ -1,7 +1,7 @@
 <script context="module">
 
     import { writable } from "svelte/store";
-    export let zoomLevel = writable(60)
+    export let zoomLevel = writable(100)
 
 </script>
 

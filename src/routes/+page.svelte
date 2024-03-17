@@ -12,6 +12,5 @@
     <Grid />
     <Input />
     <QuickTools />
-    <ZoomTool/>
     <IslandsModalListings />
 </div>

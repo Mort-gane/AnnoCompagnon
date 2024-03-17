@@ -1,13 +1,18 @@
 <script>
 
     import { registeredItemsNames } from "$lib/Class/Items.js";
-    import { writable } from "svelte/store";
+    import { onMount } from "svelte"
 
     export let island
-
     export let islandModalShow
 
-    let inputName = ""
+    let inputName
+    let input
+    onMount(()=>{
+        inputName = ""
+        input.focus()
+    })
+
     let changeInputName = ({ target }) => inputName = target.value
     let addNewItem = () => {
         registeredItemsNames.update(n => [...[inputName],...n])
@@ -15,20 +20,21 @@
         islandModalShow = false
         inputName = ""
     }
-    let isEnter = ({ key, target }) => { 
+    let isEnterOrEscape = ({ key, target }) => { 
         if( key === "Enter" && target.value ) {
             inputName = target.value
             addNewItem()
+        } else if ( key === "Escape" ) {
+            islandModalShow = false
         }
     }
 
-    let input
-    onMount(()=>input.focus())
+
 
 </script>
 
 <div class="join w-full rounded-t-none">
-    <input bind:this={input} on:keyup={changeInputName} on:keydown={isEnter} class="input input-bordered join-item flex-1" placeholder="Bread" />
+    <input bind:this={input} on:keyup={changeInputName} on:keydown={isEnterOrEscape} class="input input-bordered join-item flex-1" placeholder="Bread" />
     <button on:click={addNewItem} disabled="{!inputName?'disabled':''}"  class="btn join-item"  >
         <i class="fa-solid fa-plus"></i>
     </button>
