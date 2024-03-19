@@ -10,10 +10,10 @@
             <i class="fa-solid fa-arrows-to-eye"></i>
         </button>
     </div>
-    <div class="tooltip tooltip-bottom tooltip-info" data-tip="Center the grid">
-        <button class="btn btn-sm btn-circle">
-
-        </button>
+    <div class="tooltip tooltip-bottom tooltip-info" data-tip="Parameters">
+        <label class="btn btn-sm btn-circle" for="parameters">
+            <i class="fa-solid fa-gears"></i>
+        </label>
     </div>
     <div class="tooltip tooltip-bottom tooltip-info" data-tip="Export to file...">
         <button class="btn btn-sm btn-circle">
@@ -23,6 +23,11 @@
     <div class="tooltip tooltip-bottom tooltip-info" data-tip="Import a file">
         <button class="btn btn-sm btn-circle">
             <i class="fa-solid fa-upload"></i>
+        </button>
+    </div>
+    <div class="tooltip tooltip-bottom tooltip-info" data-tip="Help">
+        <button class="btn btn-sm btn-circle">
+            <i class="fa-solid fa-question"></i>
         </button>
     </div>
     <div class="tooltip tooltip-bottom" data-tip="">

@@ -1,6 +1,5 @@
 <script>
 
-    import { fly } from "svelte/transition";
     export let delItem
     export let color
     export let item
@@ -30,7 +29,7 @@
 
 <input type="checkbox" bind:checked id={item.UUID} hidden/>
 {#if checked}
-    <div class="flex flex-col rounded-t-lg rounded-b h-fit overflow-hidden w-32" transition:fly={{ duration : 1000, x : -200 }}>
+    <div class="flex flex-col rounded-t-lg rounded-b h-fit overflow-hidden w-32">
         <div class="px-2 py-1 flex gap-1 text-white" style="background:#{color}">
             <div class="flex-1">
                 <input class="bg-transparent w-full" placeholder="No name" bind:value={$name} />

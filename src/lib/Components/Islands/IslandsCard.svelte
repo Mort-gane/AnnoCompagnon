@@ -6,6 +6,7 @@
     import { draggable } from "@neodrag/svelte"; //Used to move around the card
     import { onMount } from "svelte"; //Used for changing the place of the card
     import { fly } from "svelte/transition"; //Used for the side menu
+    import { flip } from "svelte/animate";
 
     export let island
     //Var I need later on
@@ -40,18 +41,18 @@
 
 </script>
 
-<input type="radio" name="card" id="{UUID}" hidden/>
 <div class="absolute" bind:this={DOMisland} use:draggable={draggablePayload}>
-    <label class="flex gap-2" for="{UUID}">
+    <div class="flex gap-2">
         <div class="w-52 h-fit flex flex-col overflow-hidden rounded-t-lg rounded-b ring-cyan-600 z-10">
             <div class="handle-card flex gap-1 py-1 px-2 text-gray-100 items-center" style="background:#{color}">
                 <div class="font-semibold flex-1">
                     <input class="bg-transparent w-full" placeholder="No name" bind:value={island.name} />
                 </div>
-                <label class="btn btn-sm btn-ghost">
-                    <input type="checkbox" bind:checked={openSideMenu} id="sideMenu-{UUID}" hidden/>
-                    <i class="fa-solid fa-ellipsis"></i>
-                </label>
+                <div class="tooltip tooltip-left tooltip-info" data-tip="Discard that island">
+                    <label class="btn btn-sm btn-ghost" for="cardModalDiscard-{UUID}">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </label>
+                </div>
             </div>
             <div class="flex flex-col bg-base-300 min-h-4">
                 {#each $items as item (item.UUID)}
@@ -63,33 +64,12 @@
             </div>
             <div class="handle-card h-2" style="background:#{color}"></div>
         </div>
-        {#if openSideMenu}
-            <div class="join join-vertical h-fit" transition:fly={{ duration : 500, x : -50 }}>
-                <label class="btn join-item btn-sm" for="sideMenu-{UUID}">
-                    <i class="fa-solid fa-times"></i>
-                </label>
-                <div class="tooltip tooltip-right tooltip-info" data-tip="Discard that island">
-                    <label class="btn join-item btn-sm btn-error" for="cardModalDiscard-{UUID}">
-                        <i class="fa-regular fa-trash-can"></i>
-                    </label>
-                </div>
-            </div>
-        {/if}
-        {#each $items as item(item.UUID)}
-            {@const delItem = () => $items = $items.filter(n=>n.UUID!==item.UUID)}
-            <IslandsCardItemsMenu {item} {delItem} {color} />
-        {/each}
-    </label>
+        <div class="grid grid-cols-3 gap-1">
+            {#each $items as item(item.UUID)}
+                {@const delItem = () => $items = $items.filter(n=>n.UUID!==item.UUID)}
+                <IslandsCardItemsMenu {item} {delItem} {color} />
+            {/each}
+        </div>
+    </div>
 </div>
 
-<style>
-
-    input:focus-visible.bg-transparent {
-        outline: none;
-    }
-
-    input[name="card"]:checked + div .ring-cyan-600 {
-        box-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-    }
-
-</style>

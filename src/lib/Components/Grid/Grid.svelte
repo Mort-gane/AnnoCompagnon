@@ -26,9 +26,7 @@
 <div class="absolute border-2 border-info relative bg-grid" style="height: 9000px; width : 9000px;" 
     use:draggable={{ handle : ".handle", position : $gridPosition, onDrag }}>
 
-    <label class="absolute w-full h-full handle">
-        <input type="radio" name="card" value="dummy" id="cardDummy" hidden/>
-    </label>
+    <grid class="absolute w-full h-full handle"></grid>
     {#each $islandsStore as island (island.UUID)}
         <IslandsCard {island} />
     {/each}
