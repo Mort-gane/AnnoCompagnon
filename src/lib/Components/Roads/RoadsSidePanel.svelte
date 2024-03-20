@@ -1,15 +1,16 @@
-<div class="drawer drawer-end">
-    <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
-    <div class="drawer-content">
-      <!-- Page content here -->
-      <label for="my-drawer-4" class="drawer-button btn btn-primary">Open drawer</label>
-    </div> 
-    <div class="drawer-side">
-      <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
-      <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-        <!-- Sidebar content here -->
-        <li><a>Sidebar Item 1</a></li>
-        <li><a>Sidebar Item 2</a></li>
-      </ul>
-    </div>
+<script>
+
+  import { parameters } from '$lib/Components/Controls/ParametersModal.svelte'
+
+</script>
+
+<div class="shadow-inner bg-base-300 overflow-hidden"
+  class:w-64={!["top","bottom"].includes($parameters?.display?.roadMenu || "")}
+  class:h-48={!["left","right"].includes($parameters?.display?.roadMenu || "")}
+  class:absolute={$parameters?.display?.roadMenu === "floating"}
+  class:top-0={$parameters?.display?.roadMenu === "floating"}
+  class:left-2={$parameters?.display?.roadMenu === "floating"}
+  class:hover:resize={$parameters?.display?.roadMenu === "floating"}
+>
+  A
 </div>
