@@ -1,9 +1,7 @@
 <script context="module">
 
   import { writable } from 'svelte/store'
-  export let parameters = writable({
-
-  })
+  export let parameters = writable({})
 
 </script>
 <script>
@@ -34,7 +32,7 @@
 
 </script>
 
-<input type="checkbox" id="parameters" class="modal-toggle" checked/>
+<input type="checkbox" id="parameters" class="modal-toggle"/>
 <div class="modal" role="dialog">
   <div class="modal-box bg-base-200 p-2">
     <div class="flex">
@@ -47,12 +45,9 @@
         <div class="flex flex-col p-3 gap-4 flex-1 text-lg">
           <label>
               <span class="shrink-0">Road pannel :</span>
-              <select on:change={change} value={$parameters?.display?.roadMenu || "right"} class="select select-bordered w-full max-w-xs">
-                <option value="left" >Left</option>
-                <option value="right">Right</option>
+              <select on:change={change} value={$parameters?.display?.roadMenu || "top"} class="select select-bordered w-full max-w-xs">
                 <option value="top">Top</option>
                 <option value="bottom">Bottom</option>
-                <option value="floating">Floating</option>
               </select>
           </label>
         </div>

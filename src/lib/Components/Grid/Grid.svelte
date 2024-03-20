@@ -31,15 +31,3 @@
         <IslandsCard {island} />
     {/each}
 </div>
-<div>
-    
-</div>
-
-<style>
-
-    .bg-grid {
-        background-size: 20px 20px;
-        background-image: linear-gradient(to right, rgba(140, 140, 140, 0.411) 1px, transparent 1px),linear-gradient(to bottom, rgba(140, 140, 140, 0.411) 1px, transparent 1px);
-    }
-
-</style>

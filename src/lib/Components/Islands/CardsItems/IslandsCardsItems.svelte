@@ -1,6 +1,8 @@
 <script>
 
     export let item //The item passed by the card
+    export let hideEditButton = false
+
     let production = item.production
     let consumtion = item.consumtion
     let consumtionTT = item.consumtionTT
@@ -13,9 +15,11 @@
     <span class="">
         {$production>$consumtionTT?'+':''}{$production-$consumtionTT}t/u
     </span>
-    <span class="hided-edit">
-        <i class="fa-solid fa-cogs"></i>
-    </span>
+    {#if !hideEditButton}
+        <span class="hided-edit">
+            <i class="fa-solid fa-cogs"></i>
+        </span>
+    {/if}
 </label>
 <div class="flex h-2">
     {#if $production && $production>=$consumtionTT}
