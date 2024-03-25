@@ -1,5 +1,6 @@
 <script>
 
+    export let delItem
     export let item //The item passed by the card
     export let hideEditButton = false
 

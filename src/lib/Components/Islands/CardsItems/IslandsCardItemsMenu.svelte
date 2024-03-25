@@ -1,6 +1,5 @@
 <script>
 
-    export let delItem
     export let color
     export let item
     let name = item.name
@@ -29,6 +28,7 @@
 
 <input type="checkbox" bind:checked id={item.UUID} hidden/>
 {#if checked}
+<div class="relative flex flex-col gap-2">
     <div class="flex flex-col rounded-t-lg rounded-b h-fit overflow-hidden w-48 bg-base-300">
         <div class="px-2 py-1 flex gap-1 text-white" style="background:#{color}">
             <div class="flex-1">
@@ -62,12 +62,13 @@
                     44
                 </div>
             </button>
-            <button class="btn btn-error btn-xs w-8" on:click={delItem}>
-                <i class="fa-solid fa-trash-can"></i>
+            <button class="btn btn-success btn-xs w-8">
+                <i class="fa-solid fa-square-plus"></i>
             </button>
         </div>
         <div class="p-1" style="background:#{color}"></div>
     </div>
+</div>
 {/if}
 
 <style>
