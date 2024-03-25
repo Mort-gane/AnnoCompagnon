@@ -15,7 +15,8 @@
 
     let changeInputName = ({ target }) => inputName = target.value
     let addNewItem = () => {
-        registeredItemsNames.update(n => [...[inputName],...n])
+        if (!$registeredItemsNames.some(n => n.toLowerCase() === inputName.toLowerCase())) 
+            registeredItemsNames.update(n => [...[inputName],...n])
         island.addItemsToIslands(inputName)
         islandModalShow = false
         inputName = ""

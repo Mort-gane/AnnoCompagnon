@@ -7,10 +7,16 @@ export class Items {
 
     constructor (name) {
 
-        this.UUID = v4() //UUID
+        this.UUID = v4()
         this.name = writable(name)
+        this._name = name
+        this.name_s = this.name.subscribe(n => this._name = n)
         this.production = writable(0)
+        this._production = 0
+        this.production_s = this.production.subscribe(n =>  this._production = n)
         this.consumtion = writable(0)
+        this._consumtiom = 0
+        this.consumtion_s = this.consumtion.subscribe(n => this._consumtiom = n)
         this.consumtionTT = derived(
             [this.consumtion],
             ([$c]) => {

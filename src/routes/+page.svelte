@@ -5,6 +5,7 @@
     import QuickTools from "$lib/Components/Controls/QuickTools.svelte"
     import IslandsModalListings from '$lib/Components/Islands/IslandsModalListings.svelte';
     import RoadsSidePanel from "$lib/Components/Roads/RoadsSidePanel.svelte";
+    import Toaster from "$lib/Components/Toast/Toaster.svelte";
 
 </script>
 
@@ -16,6 +17,7 @@
         <QuickTools />
     </div>
     <IslandsModalListings />
+    <Toaster />
 </div>
 
 <style>

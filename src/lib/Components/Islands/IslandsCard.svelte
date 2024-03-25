@@ -59,7 +59,7 @@
             <div class="flex flex-col bg-base-300 min-h-4">
                 {#each $items as item (item.UUID)}
                     {@const delItem = () => $items = $items.filter(n=>n.UUID!==item.UUID)}
-                    <IslandsCardsItems {delItem} {item} />
+                    <IslandsCardsItems {delItem} {item}/>
                 {/each}
                 <label class="btn btn-xs m-1 color-btn capitalize normal-case" style="--color : #{color}" for="cardModalProduction-{UUID}">
                     Add an item
